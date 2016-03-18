@@ -17,6 +17,3 @@ Getting the lint report, just run:
 go lint .
 ```
 
-## Links
-
-CI: https://ci.r3labs.io/git.r3labs.io/flow-libraries/binary-prefix
