@@ -6,7 +6,6 @@ specified in https://en.wikipedia.org/wiki/Binary_prefix
 ## Build status
 
 * master:  [![CircleCI Master](https://circleci.com/gh/r3labs/binary-prefix/tree/master.svg?style=svg&circle-token=627e89c447fe342aff9815ca146b081a37c075ad)](https://circleci.com/gh/r3labs/binary-prefix/tree/master)
-* develop: [![CircleCI Develop](https://circleci.com/gh/r3labs/binary-prefix/tree/develop.svg?style=svg&circle-token=627e89c447fe342aff9815ca146b081a37c075ad)](https://circleci.com/gh/r3labs/binary-prefix/tree/develop)
 
 ## Installing
 
