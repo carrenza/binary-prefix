@@ -18,3 +18,4 @@ deps: dev-deps
 
 dev-deps:
 	go get -u github.com/golang/lint/golint
+	go get -u github.com/smartystreets/goconvey/convey

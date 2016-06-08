@@ -7,42 +7,165 @@ package binaryprefix
 import (
 	"fmt"
 	"testing"
+
+	. "github.com/smartystreets/goconvey/convey"
 )
 
-func TestDummyBuilder(t *testing.T) {
-	fmt.Println("")
+func TestInvalidFormat(t *testing.T) {
+	Convey("Scenario: Convert string with an invalid format to number of megabytes", t, func() {
+		Convey("Given the string 'foo', fails as it is an invalid format", func() {
+			str := "foo"
+			mb, err := GetMB(str)
+			So(mb, ShouldEqual, 0)
+			So(err.Error(), ShouldEqual, "strconv.ParseFloat: parsing \"f\": invalid syntax")
+		})
+	})
 }
 
 func TestMB(t *testing.T) {
-	mb, err := GetMB("1MB")
-	if err != nil {
-		t.Error(err)
-	}
-	if mb != 1 {
-		t.Error("incorrect conversion it should be 1 mb")
-	}
-}
-
-func TestMBdowncase(t *testing.T) {
-	_, err := GetMB("1mb")
-	if err == nil {
-		t.Error("lower case demoninations should not be supported")
-	}
+	Convey("Scenario: Convert string with the prefix MB to number of megabytes", t, func() {
+		Convey("Given the string 1MB, the number of megabytes is 1", func() {
+			str := "1MB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 1)
+		})
+		Convey("Given the string 0.5MB, the number of megabytes is 0.5", func() {
+			str := "0.5MB"
+			mb, err := GetMB(str)
+			fmt.Println(err)
+			So(mb, ShouldEqual, 0)
+		})
+		Convey("Given the string 1mb, the number of megabytes is 0 as lower case denominations are not supported", func() {
+			str := "1mb"
+			mb, err := GetMB(str)
+			So(mb, ShouldEqual, 0)
+			So(err.Error(), ShouldEqual, "Unknown Denomination")
+		})
+	})
 }
 
 func TestGB(t *testing.T) {
-	mb, err := GetMB("1GB")
-	if err != nil {
-		t.Error(err)
-	}
-	if mb != 1024 {
-		t.Error("incorrect conversion it should be 1 mb")
-	}
+	Convey("Scenario: Convert string with the prefix GB to number of megabytes", t, func() {
+		Convey("Given the string 1GB, the number of megabytes is 1024", func() {
+			str := "1GB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 1024)
+		})
+		Convey("Given the string 0.5GB, the number of megabytes is 0.5024", func() {
+			str := "0.5GB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 512)
+		})
+		Convey("Given the string 1gb, the number of megabytes is 0 as lower case denominations are not supported", func() {
+			str := "1gb"
+			mb, err := GetMB(str)
+			So(mb, ShouldEqual, 0)
+			So(err.Error(), ShouldEqual, "Unknown Denomination")
+		})
+	})
 }
 
-func TestGBdowncase(t *testing.T) {
-	_, err := GetMB("1gb")
-	if err == nil {
-		t.Error("lower case demoninations should not be supported")
-	}
+func TestTB(t *testing.T) {
+	Convey("Scenario: Convert string with the prefix TB to number of megabytes", t, func() {
+		Convey("Given the string 1TB, the number of megabytes is 1048576", func() {
+			str := "1TB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 1048576)
+		})
+		Convey("Given the string 0.5TB, the number of megabytes is 0.5048576", func() {
+			str := "0.5TB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 524288)
+		})
+		Convey("Given the string 1tb, the number of megabytes is 0 as lower case denominations are not supported", func() {
+			str := "1tb"
+			mb, err := GetMB(str)
+			So(mb, ShouldEqual, 0)
+			So(err.Error(), ShouldEqual, "Unknown Denomination")
+		})
+	})
+}
+
+func TestPB(t *testing.T) {
+	Convey("Scenario: Convert string with the prefix PB to number of megabytes", t, func() {
+		Convey("Given the string 1PB, the number of megabytes is 1073741824", func() {
+			str := "1PB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 1073741824)
+		})
+		Convey("Given the string 0.5PB, the number of megabytes is 0.5073740.5824", func() {
+			str := "0.5PB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 536870912)
+		})
+		Convey("Given the string 1pb, the number of megabytes is 0 as lower case denominations are not supported", func() {
+			str := "1pb"
+			mb, err := GetMB(str)
+			So(mb, ShouldEqual, 0)
+			So(err.Error(), ShouldEqual, "Unknown Denomination")
+		})
+	})
+}
+
+func TestEB(t *testing.T) {
+	Convey("Scenario: Convert string with the prefix EB to number of megabytes", t, func() {
+		Convey("Given the string 1EB, the number of megabytes is 1099511627776", func() {
+			str := "1EB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 1099511627776)
+		})
+		Convey("Given the string 0.5EB, the number of megabytes is 0.509950.50.5627776", func() {
+			str := "0.5EB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 549755813888)
+		})
+		Convey("Given the string 1eb, the number of megabytes is 0 as lower case denominations are not supported", func() {
+			str := "1eb"
+			mb, err := GetMB(str)
+			So(mb, ShouldEqual, 0)
+			So(err.Error(), ShouldEqual, "Unknown Denomination")
+		})
+	})
+}
+
+func TestZB(t *testing.T) {
+	Convey("Scenario: Convert string with the prefix ZB to number of megabytes", t, func() {
+		Convey("Given the string 1ZB, the number of megabytes is 1125899906842624", func() {
+			str := "1ZB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 1125899906842624)
+		})
+		Convey("Given the string 0.5ZB, the number of megabytes is 0.50.525899906842624", func() {
+			str := "0.5ZB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 562949953421312)
+		})
+		Convey("Given the string 1zb, the number of megabytes is 0 as lower case denominations are not supported", func() {
+			str := "1zb"
+			mb, err := GetMB(str)
+			So(mb, ShouldEqual, 0)
+			So(err.Error(), ShouldEqual, "Unknown Denomination")
+		})
+	})
+}
+
+func TestYB(t *testing.T) {
+	Convey("Scenario: Convert string with the prefix YB to number of megabytes", t, func() {
+		Convey("Given the string 1YB, the number of megabytes is 1152921504606846976", func() {
+			str := "1YB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 1152921504606846976)
+		})
+		Convey("Given the string 0.5YB, the number of megabytes is 0.50.552920.5504606846976", func() {
+			str := "0.5YB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 576460752303423488)
+		})
+		Convey("Given the string 1yb, the number of megabytes is 0 as lower case denominations are not supported", func() {
+			str := "1yb"
+			mb, err := GetMB(str)
+			So(mb, ShouldEqual, 0)
+			So(err.Error(), ShouldEqual, "Unknown Denomination")
+		})
+	})
 }
