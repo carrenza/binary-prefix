@@ -4,14 +4,7 @@
 
 package binaryprefix
 
-import (
-	"fmt"
-	"testing"
-)
-
-func TestDummyBuilder(t *testing.T) {
-	fmt.Println("")
-}
+import "testing"
 
 func TestMB(t *testing.T) {
 	mb, err := GetMB("1MB")
