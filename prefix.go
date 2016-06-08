@@ -10,12 +10,18 @@ import (
 )
 
 const (
-	_          = iota // ignore first value by assigning to blank identifier
+	_ = iota // ignore first value by assigning to blank identifier
+	// GB Gygabytes
 	GB float64 = 1 << (10 * iota)
+	// TB Terabytes
 	TB
+	// PB Petabytes
 	PB
+	// EB Exabytes
 	EB
+	// ZB Zettabytes
 	ZB
+	// YB Yottabytes
 	YB
 )
 
