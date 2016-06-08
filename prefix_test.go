@@ -4,38 +4,24 @@
 
 package binaryprefix
 
-import "testing"
+import (
+	"testing"
+
+	. "github.com/smartystreets/goconvey/convey"
+)
 
 func TestMB(t *testing.T) {
-	mb, err := GetMB("1MB")
-	if err != nil {
-		t.Error(err)
-	}
-	if mb != 1 {
-		t.Error("incorrect conversion it should be 1 mb")
-	}
-}
-
-func TestMBdowncase(t *testing.T) {
-	_, err := GetMB("1mb")
-	if err == nil {
-		t.Error("lower case demoninations should not be supported")
-	}
-}
-
-func TestGB(t *testing.T) {
-	mb, err := GetMB("1GB")
-	if err != nil {
-		t.Error(err)
-	}
-	if mb != 1024 {
-		t.Error("incorrect conversion it should be 1 mb")
-	}
-}
-
-func TestGBdowncase(t *testing.T) {
-	_, err := GetMB("1gb")
-	if err == nil {
-		t.Error("lower case demoninations should not be supported")
-	}
+	Convey("Scenario: Convert string with the prefix MB to number of megabytes", t, func() {
+		Convey("Given the string 1MB, the number of megabytes is 1", func() {
+			str := "1MB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 1)
+		})
+		Convey("Given the string 1mb, the number of megabytes is 0 as lower case denominations are not supported", func() {
+			str := "1mb"
+			mb, err := GetMB(str)
+			So(mb, ShouldEqual, 0)
+			So(err.Error(), ShouldEqual, "Unknown Denomination")
+		})
+	})
 }
