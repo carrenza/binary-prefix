@@ -105,3 +105,19 @@ func TestZB(t *testing.T) {
 		})
 	})
 }
+
+func TestYB(t *testing.T) {
+	Convey("Scenario: Convert string with the prefix YB to number of megabytes", t, func() {
+		Convey("Given the string 1YB, the number of megabytes is 1152921504606846976", func() {
+			str := "1YB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 1152921504606846976)
+		})
+		Convey("Given the string 1yb, the number of megabytes is 0 as lower case denominations are not supported", func() {
+			str := "1yb"
+			mb, err := GetMB(str)
+			So(mb, ShouldEqual, 0)
+			So(err.Error(), ShouldEqual, "Unknown Denomination")
+		})
+	})
+}
