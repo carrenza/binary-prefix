@@ -57,3 +57,19 @@ func TestTB(t *testing.T) {
 		})
 	})
 }
+
+func TestPB(t *testing.T) {
+	Convey("Scenario: Convert string with the prefix PB to number of megabytes", t, func() {
+		Convey("Given the string 1PB, the number of megabytes is 1073741824", func() {
+			str := "1PB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 1073741824)
+		})
+		Convey("Given the string 1pb, the number of megabytes is 0 as lower case denominations are not supported", func() {
+			str := "1pb"
+			mb, err := GetMB(str)
+			So(mb, ShouldEqual, 0)
+			So(err.Error(), ShouldEqual, "Unknown Denomination")
+		})
+	})
+}
