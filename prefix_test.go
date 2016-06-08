@@ -5,6 +5,7 @@
 package binaryprefix
 
 import (
+	"fmt"
 	"testing"
 
 	. "github.com/smartystreets/goconvey/convey"
@@ -28,6 +29,12 @@ func TestMB(t *testing.T) {
 			mb, _ := GetMB(str)
 			So(mb, ShouldEqual, 1)
 		})
+		Convey("Given the string 0.5MB, the number of megabytes is 0.5", func() {
+			str := "0.5MB"
+			mb, err := GetMB(str)
+			fmt.Println(err)
+			So(mb, ShouldEqual, 0)
+		})
 		Convey("Given the string 1mb, the number of megabytes is 0 as lower case denominations are not supported", func() {
 			str := "1mb"
 			mb, err := GetMB(str)
@@ -43,6 +50,11 @@ func TestGB(t *testing.T) {
 			str := "1GB"
 			mb, _ := GetMB(str)
 			So(mb, ShouldEqual, 1024)
+		})
+		Convey("Given the string 0.5GB, the number of megabytes is 0.5024", func() {
+			str := "0.5GB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 512)
 		})
 		Convey("Given the string 1gb, the number of megabytes is 0 as lower case denominations are not supported", func() {
 			str := "1gb"
@@ -60,6 +72,11 @@ func TestTB(t *testing.T) {
 			mb, _ := GetMB(str)
 			So(mb, ShouldEqual, 1048576)
 		})
+		Convey("Given the string 0.5TB, the number of megabytes is 0.5048576", func() {
+			str := "0.5TB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 524288)
+		})
 		Convey("Given the string 1tb, the number of megabytes is 0 as lower case denominations are not supported", func() {
 			str := "1tb"
 			mb, err := GetMB(str)
@@ -75,6 +92,11 @@ func TestPB(t *testing.T) {
 			str := "1PB"
 			mb, _ := GetMB(str)
 			So(mb, ShouldEqual, 1073741824)
+		})
+		Convey("Given the string 0.5PB, the number of megabytes is 0.5073740.5824", func() {
+			str := "0.5PB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 536870912)
 		})
 		Convey("Given the string 1pb, the number of megabytes is 0 as lower case denominations are not supported", func() {
 			str := "1pb"
@@ -92,6 +114,11 @@ func TestEB(t *testing.T) {
 			mb, _ := GetMB(str)
 			So(mb, ShouldEqual, 1099511627776)
 		})
+		Convey("Given the string 0.5EB, the number of megabytes is 0.509950.50.5627776", func() {
+			str := "0.5EB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 549755813888)
+		})
 		Convey("Given the string 1eb, the number of megabytes is 0 as lower case denominations are not supported", func() {
 			str := "1eb"
 			mb, err := GetMB(str)
@@ -108,6 +135,11 @@ func TestZB(t *testing.T) {
 			mb, _ := GetMB(str)
 			So(mb, ShouldEqual, 1125899906842624)
 		})
+		Convey("Given the string 0.5ZB, the number of megabytes is 0.50.525899906842624", func() {
+			str := "0.5ZB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 562949953421312)
+		})
 		Convey("Given the string 1zb, the number of megabytes is 0 as lower case denominations are not supported", func() {
 			str := "1zb"
 			mb, err := GetMB(str)
@@ -123,6 +155,11 @@ func TestYB(t *testing.T) {
 			str := "1YB"
 			mb, _ := GetMB(str)
 			So(mb, ShouldEqual, 1152921504606846976)
+		})
+		Convey("Given the string 0.5YB, the number of megabytes is 0.50.552920.5504606846976", func() {
+			str := "0.5YB"
+			mb, _ := GetMB(str)
+			So(mb, ShouldEqual, 576460752303423488)
 		})
 		Convey("Given the string 1yb, the number of megabytes is 0 as lower case denominations are not supported", func() {
 			str := "1yb"
