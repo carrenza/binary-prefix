@@ -32,7 +32,10 @@ func getValues(size string) (string, float64, error) {
 	return d, f, err
 }
 
-// GetMB ...
+// GetMB gets number of megabytes as an integer given a string formatted
+// following the binary prefix convention.
+// https://en.wikipedia.org/wiki/Binary_prefix
+//
 func GetMB(size string) (int, error) {
 	d, s, err := getValues(size)
 	if err != nil {
